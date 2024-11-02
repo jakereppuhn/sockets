@@ -5,7 +5,6 @@ import { Database } from "./config/database";
 import { WebSocketServer } from "./websocket-server";
 import { createRoutes } from "./routes";
 import { errorHandler } from "./middleware/error-handler";
-import { GeneralError } from "./utils/general-error";
 
 export class App {
   private app: express.Application;

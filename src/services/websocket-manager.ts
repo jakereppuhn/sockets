@@ -37,10 +37,8 @@ export class WebSocketManager extends EventEmitter {
 
   public handleConnection(machineId: string, socket: WebSocket): void {
     try {
-      // Clean up existing connection if any
       this.cleanupConnection(machineId);
 
-      // Set up new connection
       this.connections.set(machineId, socket);
       this.connectionInfo.set(machineId, {
         machineId,
@@ -50,10 +48,8 @@ export class WebSocketManager extends EventEmitter {
         reconnectAttempts: 0,
       });
 
-      // Set up event listeners
       this.setupSocketListeners(machineId, socket);
 
-      // Start heartbeat monitoring
       this.startHeartbeatMonitoring(machineId);
 
       this.logger.info(`New connection established for machine ${machineId}`);
@@ -233,7 +229,6 @@ export class WebSocketManager extends EventEmitter {
   }
 
   public destroy(): void {
-    // Cleanup all connections when shutting down
     for (const machineId of this.connections.keys()) {
       this.cleanupConnection(machineId);
     }

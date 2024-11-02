@@ -1,12 +1,27 @@
 import { Router } from "express";
 import { ResponseHandler } from "../middleware/response-handler";
 import { Logger } from "../utils/logger";
-import { Database } from "../config/database";
 import { GeneralError } from "../utils/general-error";
+import { ReadingService } from "../services";
+import { DatabaseService } from "../services/database-service";
+import { MachineReading } from "../utils/types";
 
 export const createRoutes = (logger: Logger) => {
   const router = Router();
-  const db = Database.getInstance();
+  const dbService = new DatabaseService(logger);
+  const readingService = new ReadingService(logger, dbService);
+
+  router.post("/reading", async (req, res, next) => {
+    try {
+      const reading: MachineReading = req.body;
+      await readingService.processReading(reading);
+      res.json(
+        ResponseHandler.success({ message: "Reading processed successfully" }),
+      );
+    } catch (error) {
+      next(error);
+    }
+  });
 
   router.get("/machines", async (req, res, next) => {
     try {
