@@ -1,26 +1,17 @@
-# Coe Press ERP
-
-## Initial Steps
-
-[] Get all code to GitHub
-[] Build CI/CD pipeline
-[] Build proper folder structure for coesco
-
 ## Tech Stack
 
 ### Frontend
 
-Web - React
-Mobile - React Native
-Desktop?
+React (Vite & Tailwindcss)
 
 ### Backend
 
-OpenEdge ABL
+Node (TypeScript) & Express
 
 ### Infrastructure
 
-AWS - This will allow us to scale as needed while only being charged for what we use. Over 250 services provided with uptime guarantee of 99.99% per region.
+AWS - This will allow us to scale as needed while only being charged for what we
+use. Over 250 services provided with uptime guarantee of 99.99% per region.
 
 - EC2
 - RDS (Relational Database Service)
@@ -28,9 +19,9 @@ AWS - This will allow us to scale as needed while only being charged for what we
 
 ### Other
 
-Circle CI (CI/CD pipeline): Development -> Build -> Testing -> Deployment
-Snyk (Look for package vulnerabilities)
-Sonar (Look for faults & improper use of syntax in code)
+Circle CI (CI/CD pipeline): Development -> Build -> Testing -> Deployment Snyk
+(Look for package vulnerabilities) Sonar (Look for faults & improper use of
+syntax in code)
 
 Docker (containerization)
 
@@ -40,41 +31,6 @@ Docker (containerization)
 - Production
 
 Production should have blue - green deployment
-
-## Folder Structure (Backend System)
-
-/erp-backend/
-│
-├── /src/
-│ ├── /auth/
-│ ├── /inventory/
-│ ├── /orders/
-│ ├── /finance/
-│ ├── /production/
-│ ├── /sales/
-│ ├── /marketing/
-│ ├── /quality/
-│ ├── /engineering/
-│ ├── /service/
-│ ├── /it/
-│ └── /reports/
-│ ├── /production-reports/
-│ ├── /sales-reports/
-│ ├── /marketing-reports/
-│ ├── /quality-reports/
-│ ├── /engineering-reports/
-│ └── /service-reports/
-│
-├── /ui/
-│ ├── /gui/
-│ └── /chui/
-│
-├── /config/
-├── /db/
-├── /logs/
-├── /scripts/
-├── /tests/
-└── README.md
 
 ## Non Negotiables
 
@@ -96,9 +52,8 @@ Production should have blue - green deployment
 
 ## Questions for the Developer
 
-What code are you changing?
-What does the code that's already there do?
-What changes did you make? Why?
+- What code are you changing? What does the code that's already there do?
+- What changes did you make? Why?
 
 ## Ideas
 

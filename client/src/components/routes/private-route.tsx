@@ -1,5 +1,5 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import Layout from '../layout';
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import Layout from "../layout";
 
 const PrivateRoute = () => {
 	const user = true;
@@ -11,9 +11,15 @@ const PrivateRoute = () => {
 		return <Navigate to="/login" />;
 	}
 
-	return currentPath === '' ? (
-		<Outlet />
-	) : (
+	let noLayout;
+
+	noLayout = false;
+
+	if (currentPath === "" || currentPath === "settings") {
+		noLayout = true;
+	}
+
+	return noLayout ? <Outlet /> : (
 		<Layout>
 			<Outlet />
 		</Layout>

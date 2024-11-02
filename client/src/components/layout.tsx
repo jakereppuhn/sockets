@@ -28,6 +28,7 @@ const SidebarItem = ({ label, path, icon: Icon, alert }: SidebarItemProps) => {
 	return (
 		<NavLink
 			to={path}
+			end
 			className={({ isActive }) =>
 				`relative flex items-center py-2 px-3 font-medium rounded-md cursor-pointer transition-colors group ${
 					isActive ? 'bg-primary text-primary-foreground' : 'hover:bg-muted'

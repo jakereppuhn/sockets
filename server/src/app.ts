@@ -2,7 +2,7 @@ import express from "express";
 import http from "http";
 import { Logger } from "./utils/logger";
 import { Database } from "./config/database";
-import { WebSocketServer } from "./websocket-server";
+import { WebSocketServer } from "./websocket";
 import { createRoutes } from "./routes";
 import { errorHandler } from "./middleware/error-handler";
 

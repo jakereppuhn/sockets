@@ -5,6 +5,7 @@ import { GeneralError } from "../utils/general-error";
 import { ReadingService } from "../services";
 import { DatabaseService } from "../services/database-service";
 import { MachineReading } from "../utils/types";
+import { createTestRoutes } from "./test-routes";
 
 export const createRoutes = (logger: Logger) => {
   const router = Router();
@@ -40,29 +41,7 @@ export const createRoutes = (logger: Logger) => {
     }
   });
 
-  router.get("/test-success", async (req, res, next) => {
-    try {
-      res.json(ResponseHandler.success([]));
-    } catch (error) {
-      next(error);
-    }
-  });
-
-  router.get("/test-general-error", async (req, res, next) => {
-    try {
-      throw new GeneralError(400, "Something went wrong");
-    } catch (error) {
-      next(error);
-    }
-  });
-
-  router.get("/test-unknown-error", async (req, res, next) => {
-    try {
-      throw new Error("This is an unknown error");
-    } catch (error) {
-      next(error);
-    }
-  });
+  createTestRoutes(router);
 
   return router;
 };

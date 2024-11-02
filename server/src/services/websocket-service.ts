@@ -33,6 +33,11 @@ export class WebSocketManager extends EventEmitter {
       reconnectInterval: 5000,
       ...config,
     };
+
+    this.logger.info("WebSocket Manager initialized and ready 🚀", {
+      timestamp: new Date(),
+      activeConnections: this.connections.size,
+    });
   }
 
   public handleConnection(machineId: string, socket: WebSocket): void {
@@ -52,14 +57,21 @@ export class WebSocketManager extends EventEmitter {
 
       this.startHeartbeatMonitoring(machineId);
 
-      this.logger.info(`New connection established for machine ${machineId}`);
+      this.logger.info(`New connection established for machine ${machineId}`, {
+        timestamp: new Date(),
+        activeConnections: this.connections.size,
+      });
       this.emit("connection", { machineId, timestamp: new Date() });
     } catch (error) {
       this.logger.error(
         `Error handling connection for machine ${machineId}:`,
         error,
       );
-      this.emit("error", { machineId, error, timestamp: new Date() });
+      this.emit("error", {
+        machineId,
+        error,
+        timestamp: new Date(),
+      });
     }
   }
 
