@@ -33,14 +33,6 @@ export class App {
 
     this.app.use("/api", createRoutes(this.logger));
 
-    this.app.get("/test-general-error", (req, res, next) => {
-      next(new GeneralError(400, "Something went wrong"));
-    });
-
-    this.app.get("/test-unknown-error", (req, res, next) => {
-      throw new Error("This is an unknown error");
-    });
-
     this.app.use(errorHandler(this.logger));
   }
 

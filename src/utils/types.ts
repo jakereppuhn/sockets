@@ -1,7 +1,8 @@
 export enum MachineState {
-  IDLE = 'idle',
-  RUNNING = 'running',
-  OFF = 'off'
+  IDLE = "IDLE",
+  RUNNING = "RUNNING",
+  ERROR = "ERROR",
+  MAINTENANCE = "MAINTENANCE",
 }
 
 export interface MachineReading {
@@ -33,9 +34,33 @@ export interface Machine {
   metadata?: Record<string, unknown>;
 }
 
-export interface WSMessage {
-  type: 'reading' | 'heartbeat' | 'config' | 'error' | 'command';
-  payload: unknown;
+export enum WebSocketState {
+  CONNECTING = 0,
+  OPEN = 1,
+  CLOSING = 2,
+  CLOSED = 3,
+}
+
+export enum WSMessageType {
+  READING = "reading",
+  HEARTBEAT = "heartbeat",
+  CONFIG = "config",
+  ERROR = "error",
+  COMMAND = "command",
+}
+
+// Interfaces
+export interface MachineReading {
+  machineId: string;
+  timestamp: Date;
+  ampReading: number;
+  state: MachineState;
+  connectionQuality?: number;
+}
+
+export interface WSMessage<T = unknown> {
+  type: WSMessageType;
+  payload: T;
   timestamp: Date;
 }
 
@@ -44,6 +69,14 @@ export interface WSConnectionInfo {
   connectedAt: Date;
   lastHeartbeat: Date;
   connectionQuality: number;
+  reconnectAttempts: number;
+}
+
+export interface WSManagerConfig {
+  heartbeatInterval?: number; // ms
+  heartbeatTimeout?: number; // ms
+  maxReconnectAttempts?: number;
+  reconnectInterval?: number; // ms
 }
 
 export interface ServiceResponse<T> {
@@ -73,23 +106,23 @@ export interface Alert {
 }
 
 export enum AlertType {
-  HIGH_AMPS = 'high_amps',
-  LOW_AMPS = 'low_amps',
-  DISCONNECTED = 'disconnected',
-  LONG_IDLE = 'long_idle',
-  ERROR = 'error'
+  HIGH_AMPS = "high_amps",
+  LOW_AMPS = "low_amps",
+  DISCONNECTED = "disconnected",
+  LONG_IDLE = "long_idle",
+  ERROR = "error",
 }
 
 export enum AlertSeverity {
-  LOW = 'low',
-  MEDIUM = 'medium',
-  HIGH = 'high',
-  CRITICAL = 'critical'
+  LOW = "low",
+  MEDIUM = "medium",
+  HIGH = "high",
+  CRITICAL = "critical",
 }
 
 export type MachineEvent = {
-  type: 'state_change' | 'connection' | 'error';
+  type: "state_change" | "connection" | "error";
   machineId: string;
   timestamp: Date;
   data: Record<string, unknown>;
-}
+};

@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ResponseHandler } from "../middleware/response-handler";
 import { Logger } from "../utils/logger";
 import { Database } from "../config/database";
+import { GeneralError } from "../utils/general-error";
 
 export const createRoutes = (logger: Logger) => {
   const router = Router();
@@ -19,6 +20,30 @@ export const createRoutes = (logger: Logger) => {
     try {
       const { id } = req.params;
       res.json(ResponseHandler.success([]));
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  router.get("/test-success", async (req, res, next) => {
+    try {
+      res.json(ResponseHandler.success([]));
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  router.get("/test-general-error", async (req, res, next) => {
+    try {
+      throw new GeneralError(400, "Something went wrong");
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  router.get("/test-unknown-error", async (req, res, next) => {
+    try {
+      throw new Error("This is an unknown error");
     } catch (error) {
       next(error);
     }

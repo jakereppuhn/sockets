@@ -20,9 +20,12 @@ export class ReadingService {
   }
 
   private determineState(reading: MachineReading): MachineState {
+    // get machine threshold from reading machineId
     return MachineState.RUNNING;
   }
 
   private async validateReading(reading: MachineReading): Promise<void> {
+    // ensure machineId belongs to espId
+    // ensure currentRate is within valid range for such machine
   }
 }
