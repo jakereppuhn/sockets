@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800">
+  <!-- Grid Background -->
+  <defs>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#ddd" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="1000" height="800" fill="url(#grid)"/>
+  
+  <!-- Walls -->
+  <path d="M 50 50 L 950 50 L 950 750 L 50 750 Z" 
+        fill="none" stroke="red" stroke-width="3"/>
+  
+  <!-- Entry/Exit -->
+  <path d="M 150 50 L 350 50" stroke="#333" stroke-width="6"/>
+  <text x="250" y="40" text-anchor="middle">Entry</text>
+
+  <g class="machine" id="cnc2">
+    <rect x="300" y="150" width="150" height="150" fill="#a0a0a0" stroke="#666"/>
+    <!-- <text x="300" y="195" text-anchor="middle">CNC #2</text> -->
+  </g>
+  
+  <g class="machine" id="lathe1">
+    <rect x="50" y="200" width="100" height="150" fill="#b8b8b8" stroke="#666"/>
+    <!-- <text x="140" y="335" text-anchor="middle">Lathe 1</text> -->
+  </g>
+  
+  <g class="machine" id="lathe2">
+    <rect x="300" y="400" width="150" height="100" fill="#b8b8b8" stroke="#666"/>
+    <!-- <text x="290" y="335" text-anchor="middle">Lathe 2</text> -->
+  </g>
+  
+  <g class="area" id="assembly">
+    <rect x="500" y="150" width="200" height="150" fill="#dedede" stroke="#666"/>
+    <text x="600" y="225" text-anchor="middle">Assembly Area</text>
+  </g>
+  
+  <g class="room" id="toolroom">
+    <rect x="50" y="400" width="150" height="100" fill="#f0f0f0" stroke="#666"/>
+    <!-- <text x="175" y="450" text-anchor="middle">Tool Room</text> -->
+  </g>
+</svg>
