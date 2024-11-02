@@ -35,6 +35,7 @@ export const errorHandler = (logger: Logger): ErrorRequestHandler => {
     }
 
     const metadata = {
+      statusCode: 500,
       path: req.path,
     };
 

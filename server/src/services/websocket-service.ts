@@ -8,6 +8,8 @@ import {
 } from "../utils/types";
 import { Logger } from "../utils/logger";
 import { EventEmitter } from "stream";
+import { DatabaseService } from "./database-service";
+import { ReadingService } from "./reading-service";
 
 export class WebSocketManager extends EventEmitter {
   private connections: Map<string, WebSocket>;
@@ -15,9 +17,12 @@ export class WebSocketManager extends EventEmitter {
   private logger: Logger;
   private heartbeatIntervals: Map<string, NodeJS.Timeout>;
   private readonly config: Required<WSManagerConfig>;
+  private dbService: DatabaseService;
+  private readingService;
 
   constructor(
     logger: Logger,
+    dbService: DatabaseService,
     config: WSManagerConfig = {},
   ) {
     super();
@@ -25,16 +30,19 @@ export class WebSocketManager extends EventEmitter {
     this.connectionInfo = new Map();
     this.heartbeatIntervals = new Map();
     this.logger = logger;
+    this.dbService = dbService;
+
+    this.readingService = new ReadingService(logger, dbService);
 
     this.config = {
       heartbeatInterval: 30000,
       heartbeatTimeout: 10000,
-      maxReconnectAttempts: 5,
+      maxReconnectAttempts: 1,
       reconnectInterval: 5000,
       ...config,
     };
 
-    this.logger.info("WebSocket Manager initialized and ready 🚀", {
+    this.logger.info("WebSocket initialized", {
       timestamp: new Date(),
       activeConnections: this.connections.size,
     });
@@ -153,7 +161,20 @@ export class WebSocketManager extends EventEmitter {
 
     switch (message.type) {
       case WSMessageType.HEARTBEAT:
+        this.logger.info("Heartbeat", { machineId, timestamp: new Date() });
         this.updateHeartbeat(machineId);
+        break;
+      case WSMessageType.READING:
+        try {
+          this.readingService.processReading(message.payload);
+          this.logger.info("Reading processed", {
+            machineId: machineId,
+            timestamp: new Date(),
+          });
+          this.updateHeartbeat(machineId);
+        } catch (error) {
+          this.logger.error("Failed to process reading", { error });
+        }
         break;
       case WSMessageType.ERROR:
         this.logger.error(`Error from machine ${machineId}:`, message.payload);
@@ -172,6 +193,7 @@ export class WebSocketManager extends EventEmitter {
     const info = this.connectionInfo.get(machineId);
     if (info) {
       info.lastHeartbeat = new Date();
+      info.reconnectAttempts = 0;
       this.connectionInfo.set(machineId, info);
     }
   }

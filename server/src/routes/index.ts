@@ -7,9 +7,8 @@ import { DatabaseService } from "../services/database-service";
 import { MachineReading } from "../utils/types";
 import { createTestRoutes } from "./test-routes";
 
-export const createRoutes = (logger: Logger) => {
+export const createRoutes = (logger: Logger, dbService: DatabaseService) => {
   const router = Router();
-  const dbService = new DatabaseService(logger);
   const readingService = new ReadingService(logger, dbService);
 
   router.post("/reading", async (req, res, next) => {

@@ -1,18 +1,21 @@
-import WebSocket from "ws";
+import WebSocket, { Data } from "ws";
 import { Server } from "http";
 import { Logger } from "./utils/logger";
 import { WebSocketManager } from "./services/websocket-service";
 import { MachineReading, WSMessage, WSMessageType } from "./utils/types";
+import { DatabaseService } from "./services";
 
 export class WebSocketServer {
   private wss: WebSocket.Server;
   private logger: Logger;
+  private dbService: DatabaseService;
   private wsManager: WebSocketManager;
 
-  constructor(server: Server, logger: Logger) {
+  constructor(server: Server, logger: Logger, dbService: DatabaseService) {
     this.logger = logger;
+    this.dbService = dbService;
     this.wss = new WebSocket.Server({ server });
-    this.wsManager = new WebSocketManager(logger);
+    this.wsManager = new WebSocketManager(logger, dbService);
 
     this.initialize();
     this.setupManagerEventHandlers();
@@ -45,14 +48,7 @@ export class WebSocketServer {
   }
 
   private setupManagerEventHandlers(): void {
-    this.wsManager.on(
-      "connection",
-      ({ machineId, timestamp }) => {
-        this.logger.info(`Machine ${machineId} connected`, {
-          timestamp,
-        });
-      },
-    );
+    this.wsManager.on("connection", ({ machineId, timestamp }) => {});
 
     this.wsManager.on("disconnection", ({ machineId, timestamp }) => {
       this.logger.info(`Machine ${machineId} disconnected at ${timestamp}`);
