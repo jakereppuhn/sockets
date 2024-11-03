@@ -238,10 +238,6 @@ export class WebSocketManager extends EventEmitter {
       attempt: info.reconnectAttempts,
       timestamp: new Date(),
     });
-
-    // Implement your reconnection logic here
-    // This would typically involve creating a new WebSocket connection
-    // and calling handleConnection() with the new socket
   }
 
   private cleanupConnection(machineId: string): void {

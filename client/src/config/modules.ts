@@ -1,24 +1,24 @@
 import {
-	BarChartIcon,
+	// BarChartIcon,
 	CalendarIcon,
-	ChartLineIcon,
-	CheckCircleIcon,
-	CheckSquareIcon,
-	ClipboardIcon,
+	// ChartLineIcon,
+	// CheckCircleIcon,
+	// CheckSquareIcon,
+	// ClipboardIcon,
 	ComputerIcon,
-	DollarSignIcon,
-	FileTextIcon,
-	HammerIcon,
-	LayersIcon,
+	// DollarSignIcon,
+	// FileTextIcon,
+	// HammerIcon,
+	// LayersIcon,
 	LayoutDashboardIcon,
-	LightbulbIcon,
-	MapIcon,
+	// LightbulbIcon,
+	// MapIcon,
 	NotebookIcon,
-	PackageIcon,
+	// PackageIcon,
 	SandwichIcon,
-	TruckIcon,
-	UsersIcon,
-	WrenchIcon,
+	// TruckIcon,
+	// UsersIcon,
+	// WrenchIcon,
 } from "lucide-react";
 import { FC } from "react";
 
@@ -36,115 +36,115 @@ interface Module {
 }
 
 const modules: Module[] = [
-	{
-		label: "Inventory",
-		path: "inventory",
-		icon: PackageIcon,
-		children: [
-			{
-				label: "Dashboard",
-				path: "inventory",
-				icon: PackageIcon,
-			},
-		],
-	},
-	{
-		label: "Production",
-		path: "production",
-		icon: HammerIcon,
-		children: [
-			{
-				label: "Dashboard",
-				path: "production",
-				icon: LayoutDashboardIcon,
-			},
-			{
-				label: "Planning",
-				path: "production/planning",
-				icon: ClipboardIcon,
-			},
-			{
-				label: "Work Orders",
-				path: "work-orders",
-				icon: FileTextIcon,
-			},
-			{
-				label: "BOMs",
-				path: "bill-of-materials",
-				icon: LayersIcon,
-			},
-			{
-				label: "Inventory",
-				path: "inventory",
-				icon: PackageIcon,
-			},
-			{
-				label: "Tracking",
-				path: "tracking",
-				icon: MapIcon,
-			},
-			{
-				label: "Quality",
-				path: "quality",
-				icon: CheckSquareIcon,
-			},
-			{
-				label: "Labor",
-				path: "labor",
-				icon: UsersIcon,
-			},
-			{
-				label: "Maintenance",
-				path: "maintenance",
-				icon: WrenchIcon,
-			},
-			{
-				label: "Reports",
-				path: "reports",
-				icon: BarChartIcon,
-			},
-		],
-	},
-	{
-		label: "Quality",
-		path: "quality",
-		icon: CheckCircleIcon,
-	},
-	{
-		label: "Supply",
-		path: "supply",
-		icon: TruckIcon,
-	},
-	{
-		label: "Sales",
-		path: "sales",
-		icon: DollarSignIcon,
-	},
-	{
-		label: "Finance",
-		path: "finance",
-		icon: BarChartIcon,
-	},
-	{
-		label: "HR",
-		path: "human-resources",
-		icon: UsersIcon,
-	},
-	{
-		label: "Maintenance",
-		path: "maintenance",
-		icon: WrenchIcon,
-	},
-	{
-		label: "Project",
-		path: "project",
-		icon: LightbulbIcon,
-	},
-	{
-		label: "Reports",
-		path: "reports",
-		icon: ChartLineIcon,
-	},
+	// {
+	// 	label: "Inventory",
+	// 	path: "inventory",
+	// 	icon: PackageIcon,
+	// 	children: [
+	// 		{
+	// 			label: "Dashboard",
+	// 			path: "inventory",
+	// 			icon: PackageIcon,
+	// 		},
+	// 	],
+	// },
+	// {
+	// 	label: "Production",
+	// 	path: "production",
+	// 	icon: HammerIcon,
+	// 	children: [
+	// 		{
+	// 			label: "Dashboard",
+	// 			path: "production",
+	// 			icon: LayoutDashboardIcon,
+	// 		},
+	// 		{
+	// 			label: "Planning",
+	// 			path: "production/planning",
+	// 			icon: ClipboardIcon,
+	// 		},
+	// 		{
+	// 			label: "Work Orders",
+	// 			path: "work-orders",
+	// 			icon: FileTextIcon,
+	// 		},
+	// 		{
+	// 			label: "BOMs",
+	// 			path: "bill-of-materials",
+	// 			icon: LayersIcon,
+	// 		},
+	// 		{
+	// 			label: "Inventory",
+	// 			path: "inventory",
+	// 			icon: PackageIcon,
+	// 		},
+	// 		{
+	// 			label: "Tracking",
+	// 			path: "tracking",
+	// 			icon: MapIcon,
+	// 		},
+	// 		{
+	// 			label: "Quality",
+	// 			path: "quality",
+	// 			icon: CheckSquareIcon,
+	// 		},
+	// 		{
+	// 			label: "Labor",
+	// 			path: "labor",
+	// 			icon: UsersIcon,
+	// 		},
+	// 		{
+	// 			label: "Maintenance",
+	// 			path: "maintenance",
+	// 			icon: WrenchIcon,
+	// 		},
+	// 		{
+	// 			label: "Reports",
+	// 			path: "reports",
+	// 			icon: BarChartIcon,
+	// 		},
+	// 	],
+	// },
+	// {
+	// 	label: "Quality",
+	// 	path: "quality",
+	// 	icon: CheckCircleIcon,
+	// },
+	// {
+	// 	label: "Supply",
+	// 	path: "supply",
+	// 	icon: TruckIcon,
+	// },
+	// {
+	// 	label: "Sales",
+	// 	path: "sales",
+	// 	icon: DollarSignIcon,
+	// },
+	// {
+	// 	label: "Finance",
+	// 	path: "finance",
+	// 	icon: BarChartIcon,
+	// },
+	// {
+	// 	label: "HR",
+	// 	path: "human-resources",
+	// 	icon: UsersIcon,
+	// },
+	// {
+	// 	label: "Maintenance",
+	// 	path: "maintenance",
+	// 	icon: WrenchIcon,
+	// },
+	// {
+	// 	label: "Project",
+	// 	path: "project",
+	// 	icon: LightbulbIcon,
+	// },
+	// {
+	// 	label: "Reports",
+	// 	path: "reports",
+	// 	icon: ChartLineIcon,
+	// },
 	{
 		label: "IT",
 		path: "information-technology",

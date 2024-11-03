@@ -19,6 +19,29 @@ export class Database {
           state TEXT NOT NULL
         )
       `);
+
+      Database.instance.run(`
+        CREATE TABLE IF NOT EXISTS users (
+          id TEXT PRIMARY KEY,
+          email TEXT NOT NULL UNIQUE,
+          microsoft_id TEXT NOT NULL UNIQUE,
+          display_name TEXT,
+          last_login DATETIME,
+          is_active INTEGER DEFAULT 1,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
+
+      Database.instance.run(`
+        CREATE TABLE IF NOT EXISTS roles (
+          id TEXT PRIMARY KEY,
+          name TEXT NOT NULL UNIQUE,
+          description TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+          updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+      `);
     } catch (error) {
       logger.error("Database initialization failed", error);
       throw error;

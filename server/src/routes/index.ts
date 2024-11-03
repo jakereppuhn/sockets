@@ -23,23 +23,6 @@ export const createRoutes = (logger: Logger, services: Services) => {
     }
   });
 
-  router.get("/machines", async (req, res, next) => {
-    try {
-      res.json(ResponseHandler.success([]));
-    } catch (error) {
-      next(error);
-    }
-  });
-
-  router.get("/machine/:id/readings", async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      res.json(ResponseHandler.success([]));
-    } catch (error) {
-      next(error);
-    }
-  });
-
   createTestRoutes(router);
 
   return router;

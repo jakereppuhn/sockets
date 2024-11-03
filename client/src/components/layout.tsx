@@ -142,7 +142,7 @@ const Layout = ({ children }: LayoutProps) => {
 							className={`overflow-hidden whitespace-nowrap transition-all ease-in-out ${
 								sidebarExpanded ? 'w-32' : 'w-0'
 							}`}>
-							Coe Press ERP
+							Coe Press
 						</div>
 
 						<button

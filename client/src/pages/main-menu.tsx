@@ -1,13 +1,13 @@
-import { createElement, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { formatDate, formatTime } from '../lib/utils';
-import modules from '../config/modules';
-import { DoorOpenIcon, MoonIcon, SettingsIcon, SunIcon } from 'lucide-react';
-import { useTheme } from '../hooks/use-theme-context';
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { formatDate, formatTime } from "../lib/utils";
+import modules from "../config/modules";
+import { DoorOpenIcon, MoonIcon, SettingsIcon, SunIcon } from "lucide-react";
+import { useTheme } from "../hooks/use-theme-context";
 
 const MainMenu = () => {
 	const [time, setTime] = useState<Date>(new Date());
-	const [timeFormat, setTimeFormat] = useState('24h');
+	const [timeFormat, setTimeFormat] = useState("24h");
 	const [logoutModalOpen, setLogoutModalOpen] = useState(false);
 	const [isShiftPressed, setIsShiftPressed] = useState<boolean>(false);
 
@@ -18,10 +18,10 @@ const MainMenu = () => {
 	const currentDate = new Date();
 
 	const toggleTimeFormat = () => {
-		if (timeFormat === '24h') {
-			setTimeFormat('12h');
+		if (timeFormat === "24h") {
+			setTimeFormat("12h");
 		} else {
-			setTimeFormat('24h');
+			setTimeFormat("24h");
 		}
 	};
 
@@ -43,20 +43,20 @@ const MainMenu = () => {
 				setIsShiftPressed(true);
 			}
 
-			if (event.key === 't' || event.key === 'T') {
+			if (event.key === "t" || event.key === "T") {
 				event.preventDefault();
 				toggleTheme();
 			}
 
 			if (
 				event.shiftKey &&
-				(event.code.startsWith('Digit') || event.code.startsWith('Numpad'))
+				(event.code.startsWith("Digit") || event.code.startsWith("Numpad"))
 			) {
 				let index: number | null = null;
 
-				if (event.code.startsWith('Digit')) {
-					index = Number(event.code.replace('Digit', ''));
-				} else if (event.code.startsWith('Numpad')) {
+				if (event.code.startsWith("Digit")) {
+					index = Number(event.code.replace("Digit", ""));
+				} else if (event.code.startsWith("Numpad")) {
 					index = Number(event.key);
 				}
 
@@ -67,8 +67,8 @@ const MainMenu = () => {
 				}
 			}
 
-			if (event.shiftKey && event.key === '~') {
-				navigate('/information-technology');
+			if (event.shiftKey && event.key === "~") {
+				navigate("/information-technology");
 			}
 		};
 
@@ -78,12 +78,12 @@ const MainMenu = () => {
 			}
 		};
 
-		window.addEventListener('keydown', handleKeyDown);
-		window.addEventListener('keyup', handleKeyUp);
+		window.addEventListener("keydown", handleKeyDown);
+		window.addEventListener("keyup", handleKeyUp);
 
 		return () => {
-			window.removeEventListener('keydown', handleKeyDown);
-			window.removeEventListener('keyup', handleKeyUp);
+			window.removeEventListener("keydown", handleKeyDown);
+			window.removeEventListener("keyup", handleKeyUp);
 		};
 	}, []);
 
@@ -97,12 +97,13 @@ const MainMenu = () => {
 					</div>
 				</div>
 
-				<div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+				<div className="grid gap-4">
 					{modules.slice(0, 10).map((module, index) => (
 						<Link
 							key={module.label}
 							to={`/${module.path}`}
-							className="flex flex-col text-center">
+							className="flex flex-col text-center"
+						>
 							<div className="bg-primary-foreground p-1 w-24 aspect-square rounded-lg border border-border shadow-md hover:shadow-lg transition-shadow duration-200 cursor-pointer flex items-center justify-center transform hover:scale-105 relative">
 								{<module.icon />}
 								{isShiftPressed && (
@@ -116,41 +117,46 @@ const MainMenu = () => {
 							</p>
 						</Link>
 					))}
-					<div className="col-span-1 lg:col-start-3">
+					{
+						/* <div className="col-span-1 lg:col-start-3">
 						<Link
-							key={modules[10].label}
+							key={modules[0].label}
 							to={`/${modules[10].path}`}
 							className="flex flex-col text-center">
 							<div className="bg-primary-foreground p-1 w-24 aspect-square rounded-lg border border-border shadow-md hover:shadow-lg transition-shadow duration-200 cursor-pointer flex items-center justify-center transform hover:scale-105">
-								{createElement(modules[10].icon)}
+								{createElement(modules[0].icon)}
 								{isShiftPressed && (
 									<div className="absolute bottom-0 left-0 mx-2 my-1">~</div>
 								)}
 							</div>
 							<p className="text-xs mt-1 text-primary font-semibold">
-								{modules[10].label}
+								{modules[0].label}
 							</p>
 						</Link>
-					</div>
+					</div> */
+					}
 				</div>
 
 				<div className="absolute bottom-0 left-0 p-2 flex gap-2 w-full text-primary">
 					<button
 						onClick={toggleLogoutModal}
-						className="hover:opacity-50 duration-200 transition-all ease-in-out cursor-pointer">
+						className="hover:opacity-50 duration-200 transition-all ease-in-out cursor-pointer"
+					>
 						<DoorOpenIcon />
 					</button>
 
 					<Link
-						to={'/settings'}
-						className=" hover:opacity-50 duration-200 transition-all ease-in-out cursor-pointer">
+						to={"/settings"}
+						className=" hover:opacity-50 duration-200 transition-all ease-in-out cursor-pointer"
+					>
 						<SettingsIcon />
 					</Link>
 
 					<button
 						onClick={toggleTheme}
-						className="hover:opacity-50 duration-200 transition-all ease-in-out cursor-pointer">
-						{theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+						className="hover:opacity-50 duration-200 transition-all ease-in-out cursor-pointer"
+					>
+						{theme === "dark" ? <SunIcon /> : <MoonIcon />}
 					</button>
 				</div>
 			</div>
@@ -163,12 +169,14 @@ const MainMenu = () => {
 						<div className="flex gap-2">
 							<button
 								onClick={toggleLogoutModal}
-								className="px-3 py-1.5 bg-red-600 hover:bg-red-700 rounded-lg text-white transition-all ease-in-out duration-200">
+								className="px-3 py-1.5 bg-red-600 hover:bg-red-700 rounded-lg text-white transition-all ease-in-out duration-200"
+							>
 								Yes
 							</button>
 							<button
 								onClick={toggleLogoutModal}
-								className="px-3 py-1.5 bg-neutral-200 rounded-lg hover:bg-neutral-300 transition-all ease-in-out duration-200">
+								className="px-3 py-1.5 bg-neutral-200 rounded-lg hover:bg-neutral-300 transition-all ease-in-out duration-200"
+							>
 								No
 							</button>
 						</div>
