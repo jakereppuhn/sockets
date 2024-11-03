@@ -80,8 +80,9 @@ const DeviceManager = () => {
 
 	return (
 		<div className="flex-1 p-4">
-			<h1 className="text-4xl font-bold mb-6">Device Manager</h1>
-			{/* <div className="flex mb-4">
+			{/* <h1 className="text-4xl font-bold mb-6">Device Manager</h1> */}
+			{
+				/* <div className="flex mb-4">
 				<input
 					type="text"
 					placeholder="Search by device name..."
@@ -126,7 +127,8 @@ const DeviceManager = () => {
 						))}
 					</tbody>
 				</table>
-			</div> */}
+			</div> */
+			}
 		</div>
 	);
 };

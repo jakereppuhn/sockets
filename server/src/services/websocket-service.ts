@@ -8,8 +8,7 @@ import {
 } from "../utils/types";
 import { Logger } from "../utils/logger";
 import { EventEmitter } from "stream";
-import { DatabaseService } from "./database-service";
-import { ReadingService } from "./reading-service";
+import { Services } from ".";
 
 export class WebSocketManager extends EventEmitter {
   private connections: Map<string, WebSocket>;
@@ -17,12 +16,12 @@ export class WebSocketManager extends EventEmitter {
   private logger: Logger;
   private heartbeatIntervals: Map<string, NodeJS.Timeout>;
   private readonly config: Required<WSManagerConfig>;
-  private dbService: DatabaseService;
+  private services: Services;
   private readingService;
 
   constructor(
     logger: Logger,
-    dbService: DatabaseService,
+    services: Services,
     config: WSManagerConfig = {},
   ) {
     super();
@@ -30,9 +29,8 @@ export class WebSocketManager extends EventEmitter {
     this.connectionInfo = new Map();
     this.heartbeatIntervals = new Map();
     this.logger = logger;
-    this.dbService = dbService;
-
-    this.readingService = new ReadingService(logger, dbService);
+    this.services = services;
+    this.readingService = services.reading;
 
     this.config = {
       heartbeatInterval: 30000,

@@ -1,3 +1,4 @@
+import { Services } from ".";
 import { GeneralError } from "../utils/general-error";
 import { Logger } from "../utils/logger";
 import { MachineReading, MachineState } from "../utils/types";
@@ -5,11 +6,11 @@ import { DatabaseService } from "./database-service";
 
 export class ReadingService {
   private logger: Logger;
-  private dbService: DatabaseService;
+  private db: DatabaseService;
 
-  constructor(logger: Logger, dbService: DatabaseService) {
+  constructor(logger: Logger, db: DatabaseService) {
     this.logger = logger;
-    this.dbService = dbService;
+    this.db = db;
   }
 
   async processReading(reading: MachineReading): Promise<void> {
@@ -17,7 +18,7 @@ export class ReadingService {
       await this.validateReading(reading);
       const state = this.determineState(reading);
 
-      await this.dbService.saveReading({
+      await this.db.saveReading({
         ...reading,
         state,
         timestamp: new Date(),

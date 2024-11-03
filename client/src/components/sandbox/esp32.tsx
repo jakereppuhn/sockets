@@ -146,38 +146,27 @@ const Esp32 = ({ espId, machineId }: Esp32Props) => {
 
   return (
     <div className="p-4 border rounded-lg">
-      <h3 className="font-medium mb-2">ESP32 Device</h3>
+      <h3 className="font-medium mb-2">Virtual ESP32</h3>
       <div className="space-y-2">
         <p>ESP ID: {espId}</p>
         <p>Machine ID: {machineId}</p>
-        <p>Status: {isConnected ? "Connected 🟢" : "Disconnected 🔴"}</p>
+        <p>
+          Status:{" "}
+          <span className={isConnected ? "text-green-500" : "text-red-500"}>
+            {isConnected ? "Connected" : "Disconnected"}
+          </span>
+        </p>
         {error && <p className="text-red-500">{error}</p>}
 
         <div className="flex items-center gap-2 mb-2">
-          {!isConnected
-            ? (
-              <button
-                onClick={connectWebSocket}
-                className="px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600 text-white"
-              >
-                Connect
-              </button>
-            )
-            : (
-              <button
-                onClick={disconnect}
-                className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white"
-              >
-                Disconnect
-              </button>
-            )}
-
           <button
             onClick={() => setHeartbeatEnabled(!heartbeatEnabled)}
             disabled={!isConnected}
-            className={`px-4 py-2 rounded-md text-white ${
+            className={`px-4 py-2 rounded-md text-white flex items-center justify-center w-full ${
               isConnected
-                ? heartbeatEnabled ? "bg-red-500" : "bg-neutral-500"
+                ? heartbeatEnabled
+                  ? "bg-red-500 hover:bg-red-600"
+                  : "bg-neutral-500 hover:bg-neutral-600"
                 : "bg-background"
             }`}
           >
@@ -187,15 +176,35 @@ const Esp32 = ({ espId, machineId }: Esp32Props) => {
           <button
             onClick={isReadingSending ? stopReadings : startReadings}
             disabled={!isConnected}
-            className={`px-4 py-2 rounded-md text-white ${
+            className={`px-4 py-2 rounded-md text-white flex items-center justify-center w-full ${
               isConnected
-                ? isReadingSending ? "bg-red-500" : "bg-green-500"
+                ? isReadingSending
+                  ? "bg-yellow-500 hover:bg-yellow-600"
+                  : "bg-neutral-500 hover:bg-neutral-600"
                 : "bg-background"
             }`}
           >
             <ZapIcon />
           </button>
         </div>
+
+        {!isConnected
+          ? (
+            <button
+              onClick={connectWebSocket}
+              className="px-4 py-2 rounded-md bg-neutral-500 hover:bg-neutral-600 text-white w-full"
+            >
+              Connect
+            </button>
+          )
+          : (
+            <button
+              onClick={disconnect}
+              className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white w-full"
+            >
+              Disconnect
+            </button>
+          )}
       </div>
     </div>
   );

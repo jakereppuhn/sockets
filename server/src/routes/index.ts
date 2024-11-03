@@ -2,14 +2,14 @@ import { Router } from "express";
 import { ResponseHandler } from "../middleware/response-handler";
 import { Logger } from "../utils/logger";
 import { GeneralError } from "../utils/general-error";
-import { ReadingService } from "../services";
+import { Services } from "../services";
 import { DatabaseService } from "../services/database-service";
 import { MachineReading } from "../utils/types";
 import { createTestRoutes } from "./test-routes";
 
-export const createRoutes = (logger: Logger, dbService: DatabaseService) => {
+export const createRoutes = (logger: Logger, services: Services) => {
   const router = Router();
-  const readingService = new ReadingService(logger, dbService);
+  const readingService = services.reading;
 
   router.post("/reading", async (req, res, next) => {
     try {
