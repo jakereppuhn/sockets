@@ -1,7 +1,7 @@
 import WebSocket, { Data } from "ws";
 import { Server } from "http";
 import { Logger } from "./utils/logger";
-import { WebSocketManager } from "./services/websocket-service";
+import { WebSocketService } from "./services/websocket-service";
 import { MachineReading, WSMessage, WSMessageType } from "./utils/types";
 import { Services } from "./services";
 
@@ -9,12 +9,12 @@ export class WebSocketServer {
   private wss: WebSocket.Server;
   private logger: Logger;
   private services: Services;
-  private wsManager: WebSocketManager;
+  private wsManager: WebSocketService;
 
   constructor(server: Server, logger: Logger, services: Services) {
     this.logger = logger;
     this.wss = new WebSocket.Server({ server });
-    this.wsManager = new WebSocketManager(logger, services);
+    this.wsManager = new WebSocketService(logger, services);
 
     this.initialize();
     this.setupManagerEventHandlers();

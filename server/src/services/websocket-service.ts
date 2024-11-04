@@ -10,7 +10,7 @@ import { Logger } from "../utils/logger";
 import { EventEmitter } from "stream";
 import { Services } from ".";
 
-export class WebSocketManager extends EventEmitter {
+export class WebSocketService extends EventEmitter {
   private connections: Map<string, WebSocket>;
   private connectionInfo: Map<string, WSConnectionInfo>;
   private logger: Logger;
@@ -36,7 +36,7 @@ export class WebSocketManager extends EventEmitter {
       heartbeatInterval: 30000,
       heartbeatTimeout: 10000,
       maxReconnectAttempts: 1,
-      reconnectInterval: 5000,
+      reconnectInterval: 10000,
       ...config,
     };
 

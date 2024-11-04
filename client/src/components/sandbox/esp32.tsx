@@ -27,7 +27,7 @@ const Esp32 = ({ espId, machineId }: Esp32Props) => {
             timestamp: new Date(),
           }));
         }
-      }, 10000);
+      }, 15000);
       setHeartbeatInterval(interval);
     }
   };
